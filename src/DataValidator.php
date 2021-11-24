@@ -1,32 +1,8 @@
 <?php
 namespace CarloNicora\Minimalism\Services\DataValidator;
 
-use CarloNicora\Minimalism\Interfaces\ServiceInterface;
+use CarloNicora\Minimalism\Abstracts\AbstractService;
 
-class DataValidator implements ServiceInterface
+class DataValidator extends AbstractService
 {
-    /**
-     *
-     */
-    public function initialise(
-    ): void
-    {
-    }
-
-    /**
-     *
-     */
-    public function destroy(
-    ): void
-    {
-    }
-
-    /**
-     * @return string|null
-     */
-    public static function getBaseInterface(
-    ): ?string
-    {
-        return null;
-    }
 }

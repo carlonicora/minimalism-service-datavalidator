@@ -1,7 +1,7 @@
 {
   "name": "carlonicora/minimalism-service-datavalidator",
   "description": "Data Validator service for minimalism",
-  "version": "1.0.0-alpha1",
+  "version": "1.0.0-alpha2",
   "homepage": "https://carlonicora.com",
   "time": "2020-06-13",
   "license": "MIT",
@@ -23,6 +23,6 @@
   "require": {
     "php": ">=8.1",
     "carlonicora/jsonapi": "~3",
-    "carlonicora/minimalism": "~13.0.1"
+    "carlonicora/minimalism": "~13.0"
   }
 }

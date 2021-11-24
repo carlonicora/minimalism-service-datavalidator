@@ -2,9 +2,10 @@
 namespace CarloNicora\Minimalism\Services\DataValidator\Interfaces;
 
 use CarloNicora\JsonApi\Document;
+use CarloNicora\Minimalism\Interfaces\ObjectInterface;
 use CarloNicora\Minimalism\Services\DataValidator\Objects\ValidationError;
 
-interface DataValidatorInterface
+interface DataValidatorInterface extends ObjectInterface
 {
     /**
      * @param array $payload

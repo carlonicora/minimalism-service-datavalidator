@@ -2,13 +2,14 @@
 namespace CarloNicora\Minimalism\Services\DataValidator\Abstracts;
 
 use CarloNicora\JsonApi\Document;
-use CarloNicora\Minimalism\Interfaces\SimpleObjectInterface;
+use CarloNicora\Minimalism\Interfaces\ObjectFactoryInterface;
+use CarloNicora\Minimalism\Services\DataValidator\Factories\DataValidatorFactory;
 use CarloNicora\Minimalism\Services\DataValidator\Interfaces\DataValidatorInterface;
 use CarloNicora\Minimalism\Services\DataValidator\Objects\DocumentValidator;
 use CarloNicora\Minimalism\Services\DataValidator\Objects\ValidationError;
 use Exception;
 
-abstract class AbstractDataValidator implements DataValidatorInterface, SimpleObjectInterface
+abstract class AbstractDataValidator implements DataValidatorInterface
 {
     /** @var Document|null  */
     private ?Document $document=null;
@@ -96,5 +97,14 @@ abstract class AbstractDataValidator implements DataValidatorInterface, SimpleOb
     ): bool
     {
         return true;
+    }
+    
+    /**
+     * @return ObjectFactoryInterface|string
+     */
+    public function getObjectFactoryClass(
+    ): DataValidatorFactory|string
+    {
+        return DataValidatorFactory::class;
     }
 }
