@@ -20,7 +20,8 @@ class ResourceValidator extends AbstractValidator
      */
     public function __construct(
         private string $type,
-        private bool $isIdRequired,
+        private bool $isIdRequired=false,
+        private bool $isSingleResource=true,
     )
     {
     }
@@ -61,6 +62,18 @@ class ResourceValidator extends AbstractValidator
                     error: ValidationErrors::idMissing,
                     description: '',
                     validatorType: ValidatorTypes::resource,
+                )
+            );
+
+            return false;
+        }
+
+        if ($resource::class === Document::class && $this->isSingleResource && count($resource->resources) !== 1) {
+            $this->setValidationError(
+                new ValidationError(
+                    error: ValidationErrors::numberOfResourcesMismatch,
+                    description: '',
+                    validatorType: ValidatorTypes::document,
                 )
             );
 
