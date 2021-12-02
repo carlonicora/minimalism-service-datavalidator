@@ -36,7 +36,11 @@ class AttributeValidator extends AbstractValidator
     {
         $hasAttribute = $resource->attributes->has($this->name);
 
-        if ($this->isRequired && !$hasAttribute){
+        if (!$hasAttribute){
+            if (!$this->isRequired){
+                return true;
+            }
+
             $this->setValidationError(
                 new ValidationError(
                     error: ValidationErrors::attributeMissing,
