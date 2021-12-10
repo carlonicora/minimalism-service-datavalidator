@@ -17,6 +17,7 @@ class ResourceValidator extends AbstractValidator
     /**
      * @param string $type
      * @param bool $isIdRequired
+     * @param bool $isSingleResource
      */
     public function __construct(
         private string $type,

@@ -55,7 +55,7 @@ abstract class AbstractDataValidator implements DataValidatorInterface
     public function getValidationError(
     ): ?ValidationError
     {
-        return $this->documentValidator?->getValidationError();
+        return $this->documentValidator->getValidationError();
     }
 
     /**

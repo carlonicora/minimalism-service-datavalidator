@@ -51,20 +51,18 @@ class AttributeValidator extends AbstractValidator
             return false;
         }
 
-        if ($hasAttribute) {
-            $attributeValue = $resource->attributes->get($this->name);
+        $attributeValue = $resource->attributes->get($this->name);
 
-            $type = DataTypes::tryFrom(gettype($attributeValue));
-            if ($this->type !== $type){
-                $this->setValidationError(
-                    new ValidationError(
-                        error: ValidationErrors::typeMismatch,
-                        description: $this->name . ' (expected: ' . $type?->value . ' actual: ' . $this->type->value . ')',
-                        validatorType: ValidatorTypes::attribute,
-                    )
-                );
-                return false;
-            }
+        $type = DataTypes::tryFrom(gettype($attributeValue));
+        if ($this->type !== $type){
+            $this->setValidationError(
+                new ValidationError(
+                    error: ValidationErrors::typeMismatch,
+                    description: $this->name . ' (expected: ' . $type?->value . ' actual: ' . $this->type->value . ')',
+                    validatorType: ValidatorTypes::attribute,
+                )
+            );
+            return false;
         }
 
         return true;
