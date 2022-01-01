@@ -1,6 +1,7 @@
 <?php
 namespace CarloNicora\Minimalism\Services\DataValidator\Factories;
 
+use CarloNicora\Minimalism\Enums\HttpCode;
 use CarloNicora\Minimalism\Factories\MinimalismFactories;
 use CarloNicora\Minimalism\Interfaces\ObjectFactoryInterface;
 use CarloNicora\Minimalism\Interfaces\ObjectInterface;
@@ -38,6 +39,10 @@ class DataValidatorFactory implements ObjectFactoryInterface
             className: $className,
             parameters: $parameters,
         );
+
+        if ($parameters->getNamedParameter($parameterName) === null){
+            throw new RuntimeException('Parameter ' . $parameterName . ' missing', HttpCode::PreconditionFailed->value);
+        }
 
         $response->setDocument($parameters->getNamedParameter($parameterName));
 
