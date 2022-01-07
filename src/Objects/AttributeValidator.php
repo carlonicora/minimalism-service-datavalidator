@@ -34,9 +34,7 @@ class AttributeValidator extends AbstractValidator
         Document|ResourceObject $resource,
     ): bool
     {
-        $hasAttribute = $resource->attributes->has($this->name);
-
-        if (!$hasAttribute){
+        if (!$resource->attributes->has($this->name)){
             if (!$this->isRequired){
                 return true;
             }
