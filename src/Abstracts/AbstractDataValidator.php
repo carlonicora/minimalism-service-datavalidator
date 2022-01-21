@@ -2,6 +2,7 @@
 namespace CarloNicora\Minimalism\Services\DataValidator\Abstracts;
 
 use CarloNicora\JsonApi\Document;
+use CarloNicora\JsonApi\Objects\ResourceObject;
 use CarloNicora\Minimalism\Interfaces\ObjectFactoryInterface;
 use CarloNicora\Minimalism\Services\DataValidator\Factories\DataValidatorFactory;
 use CarloNicora\Minimalism\Services\DataValidator\Interfaces\DataValidatorInterface;
@@ -30,6 +31,19 @@ abstract class AbstractDataValidator implements DataValidatorInterface
     ): Document
     {
         return $this->document;
+    }
+
+    /**
+     * @return ResourceObject
+     */
+    final public function getSingleResource(
+    ): ResourceObject
+    {
+        if (!$this->documentValidator->isSingleResource){
+            throw new \RuntimeException('The document is expected to have multiple resources', 500);
+        }
+
+        return $this->document->getSingleResource();
     }
 
     /**
