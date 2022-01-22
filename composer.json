@@ -1,7 +1,7 @@
 {
   "name": "carlonicora/minimalism-service-datavalidator",
   "description": "Data Validator service for minimalism",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "homepage": "https://carlonicora.com",
   "time": "2020-06-13",
   "license": "MIT",

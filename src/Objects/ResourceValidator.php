@@ -15,12 +15,12 @@ class ResourceValidator extends AbstractValidator
     private array $attributesValidator=[];
 
     /**
-     * @param string $type
+     * @param array $acceptedRequiredTypes
      * @param bool $isIdRequired
      * @param bool $isSingleResource
      */
     public function __construct(
-        private string $type,
+        private array $acceptedRequiredTypes,
         private bool $isIdRequired=false,
         private bool $isSingleResource=true,
     )
@@ -46,11 +46,12 @@ class ResourceValidator extends AbstractValidator
         Document|ResourceObject $resource,
     ): bool
     {
-        if ($resource->type !== $this->type){
+        if (!in_array($resource->type, $this->acceptedRequiredTypes, true)){
+            $acceptedTypes = implode(',', $this->acceptedRequiredTypes);
             $this->setValidationError(
                 new ValidationError(
                     error: ValidationErrors::typeMismatch,
-                    description: '(expected: ' . $this->type . ' actual: ' . $resource->type . ')',
+                    description: '(expected: ' . $acceptedTypes . ' actual: ' . $resource->type . ')',
                     validatorType: ValidatorTypes::resource,
                 )
             );

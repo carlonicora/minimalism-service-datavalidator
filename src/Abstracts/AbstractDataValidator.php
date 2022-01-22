@@ -9,6 +9,7 @@ use CarloNicora\Minimalism\Services\DataValidator\Interfaces\DataValidatorInterf
 use CarloNicora\Minimalism\Services\DataValidator\Objects\DocumentValidator;
 use CarloNicora\Minimalism\Services\DataValidator\Objects\ValidationError;
 use Exception;
+use RuntimeException;
 
 abstract class AbstractDataValidator implements DataValidatorInterface
 {
@@ -40,7 +41,7 @@ abstract class AbstractDataValidator implements DataValidatorInterface
     ): ResourceObject
     {
         if (!$this->documentValidator->isSingleResource){
-            throw new \RuntimeException('The document is expected to have multiple resources', 500);
+            throw new RuntimeException('The document is expected to have multiple resources', 500);
         }
 
         return $this->document->getSingleResource();
