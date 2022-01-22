@@ -15,16 +15,21 @@ class ResourceValidator extends AbstractValidator
     private array $attributesValidator=[];
 
     /**
-     * @param array $acceptedRequiredTypes
+     * @param string|null $type
+     * @param array|null $acceptedRequiredTypes
      * @param bool $isIdRequired
      * @param bool $isSingleResource
      */
     public function __construct(
-        private array $acceptedRequiredTypes,
+        private ?string $type=null,
+        private ?array $acceptedRequiredTypes=null,
         private bool $isIdRequired=false,
         private bool $isSingleResource=true,
     )
     {
+        if ($this->type === null && $this->acceptedRequiredTypes === null){
+            throw new RuntimeException('At least one validation type between "type" and "acceptedRequiredTypes" must be set.', 500);
+        }
     }
 
     /**
@@ -46,7 +51,18 @@ class ResourceValidator extends AbstractValidator
         Document|ResourceObject $resource,
     ): bool
     {
-        if (!in_array($resource->type, $this->acceptedRequiredTypes, true)){
+        if ($this->type !== null && $this->type !== $resource->type) {
+            $this->setValidationError(
+                new ValidationError(
+                    error: ValidationErrors::typeMismatch,
+                    description: '(expected: ' . $this->type . ' actual: ' . $resource->type . ')',
+                    validatorType: ValidatorTypes::resource,
+                )
+            );
+            return false;
+        }
+
+        if ($this->acceptedRequiredTypes !== null && !in_array($resource->type, $this->acceptedRequiredTypes, true)) {
             $acceptedTypes = implode(',', $this->acceptedRequiredTypes);
             $this->setValidationError(
                 new ValidationError(
