@@ -7,4 +7,5 @@ enum DataTypes: string
     case string='string';
     case int='integer';
     case float='double';
+    case array='array';
 }
