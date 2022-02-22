@@ -1,4 +1,5 @@
 <?php
+
 namespace CarloNicora\Minimalism\Services\DataValidator\Objects;
 
 use CarloNicora\JsonApi\Document;
@@ -17,9 +18,9 @@ class AttributeValidator extends AbstractValidator
      * @param DataTypes $type
      */
     public function __construct(
-        string $name,
-        private bool $isRequired=false,
-        private DataTypes $type=DataTypes::string,
+        string            $name,
+        private bool      $isRequired = false,
+        private DataTypes $type = DataTypes::string,
     )
     {
         $this->name = $name;
@@ -34,8 +35,8 @@ class AttributeValidator extends AbstractValidator
         Document|ResourceObject $resource,
     ): bool
     {
-        if (!$resource->attributes->has($this->name)){
-            if (!$this->isRequired){
+        if (! $resource->attributes->has($this->name)) {
+            if (! $this->isRequired) {
                 return true;
             }
 
@@ -50,9 +51,12 @@ class AttributeValidator extends AbstractValidator
         }
 
         $attributeValue = $resource->attributes->get($this->name);
+        if ($attributeValue === null) {
+            return ! $this->isRequired;
+        }
 
         $type = DataTypes::tryFrom(gettype($attributeValue));
-        if ($this->type !== $type){
+        if ($this->type !== $type) {
             $this->setValidationError(
                 new ValidationError(
                     error: ValidationErrors::typeMismatch,
