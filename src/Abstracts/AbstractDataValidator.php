@@ -4,6 +4,7 @@ namespace CarloNicora\Minimalism\Services\DataValidator\Abstracts;
 use CarloNicora\JsonApi\Document;
 use CarloNicora\JsonApi\Objects\ResourceObject;
 use CarloNicora\Minimalism\Interfaces\ObjectFactoryInterface;
+use CarloNicora\Minimalism\Interfaces\Sql\Interfaces\SqlDataObjectInterface;
 use CarloNicora\Minimalism\Services\DataValidator\Factories\DataValidatorFactory;
 use CarloNicora\Minimalism\Services\DataValidator\Interfaces\DataValidatorInterface;
 use CarloNicora\Minimalism\Services\DataValidator\Objects\DocumentValidator;
@@ -18,6 +19,9 @@ abstract class AbstractDataValidator implements DataValidatorInterface
 
     /** @var array|null  */
     protected ?array $existingData=null;
+
+    /** @var SqlDataObjectInterface|null  */
+    protected ?SqlDataObjectInterface $dataObject=null;
 
     /** @var Document|null  */
     protected ?Document $existingDocument=null;
@@ -62,6 +66,15 @@ abstract class AbstractDataValidator implements DataValidatorInterface
     final public function getExistingDocument(): ?Document
     {
         return $this->existingDocument;
+    }
+
+    /**
+     * @return SqlDataObjectInterface|null
+     */
+    final public function getDataObject(
+    ): ?SqlDataObjectInterface
+    {
+        return $this->dataObject;
     }
 
     /**

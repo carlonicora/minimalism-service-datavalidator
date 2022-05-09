@@ -16,7 +16,7 @@ class DataValidatorFactory implements ObjectFactoryInterface
      * @param MinimalismFactories $minimalismFactories
      */
     public function __construct(
-        private MinimalismFactories $minimalismFactories,
+        private readonly MinimalismFactories $minimalismFactories,
     )
     {
     }

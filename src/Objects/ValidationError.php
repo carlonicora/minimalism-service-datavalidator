@@ -7,9 +7,9 @@ use CarloNicora\Minimalism\Services\DataValidator\Enums\ValidatorTypes;
 class ValidationError
 {
     public function __construct(
-        private ValidationErrors $error,
-        private string $description,
-        private ValidatorTypes $validatorType,
+        private readonly ValidationErrors $error,
+        private readonly string $description,
+        private readonly ValidatorTypes $validatorType,
     )
     {
     }

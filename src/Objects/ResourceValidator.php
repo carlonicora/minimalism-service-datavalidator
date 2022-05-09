@@ -21,10 +21,10 @@ class ResourceValidator extends AbstractValidator
      * @param bool $isSingleResource
      */
     public function __construct(
-        private ?string $type=null,
-        private ?array $acceptedRequiredTypes=null,
-        private bool $isIdRequired=false,
-        private bool $isSingleResource=true,
+        private readonly ?string $type=null,
+        private readonly ?array $acceptedRequiredTypes=null,
+        private readonly bool $isIdRequired=false,
+        private readonly bool $isSingleResource=true,
     )
     {
         if ($this->type === null && $this->acceptedRequiredTypes === null){

@@ -1,5 +1,4 @@
 <?php
-
 namespace CarloNicora\Minimalism\Services\DataValidator\Objects;
 
 use CarloNicora\JsonApi\Document;
@@ -18,9 +17,9 @@ class AttributeValidator extends AbstractValidator
      * @param DataTypes $type
      */
     public function __construct(
-        string            $name,
-        private bool      $isRequired = false,
-        private DataTypes $type = DataTypes::string,
+        string $name,
+        private readonly bool $isRequired=false,
+        private readonly DataTypes $type=DataTypes::string,
     )
     {
         $this->name = $name;
