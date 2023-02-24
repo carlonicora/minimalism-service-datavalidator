@@ -55,7 +55,7 @@ class AttributeValidator extends AbstractValidator
         }
 
         $type = DataTypes::tryFrom(gettype($attributeValue));
-        if ($this->type !== $type) {
+        if ($this->type !== $type && !($type === DataTypes::int && $this->type === DataTypes::float)) {
             $this->setValidationError(
                 new ValidationError(
                     error: ValidationErrors::typeMismatch,
