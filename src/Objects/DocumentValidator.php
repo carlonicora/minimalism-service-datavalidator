@@ -31,6 +31,12 @@ class DocumentValidator extends AbstractValidator
         $this->resourcesValidator[] = $validator;
     }
 
+    public function getResourceValidator(
+    ): ResourceValidator
+    {
+        return $this->resourcesValidator[0];
+    }
+
     /**
      * @param Document|ResourceObject $resource
      * @return bool
